@@ -1,3 +1,5 @@
+# This file contains a sample code for getting the historical data for 1 symbol from any start date to end date
+
 from dotenv import load_dotenv
 import os
 from fyers_apiv3 import fyersModel
