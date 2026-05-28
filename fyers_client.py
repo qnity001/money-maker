@@ -48,7 +48,7 @@ class FyersClient:
     def fetch_full_history(self, symbol):
 
         all_candles = []
-        year_ranges = self.get_year_ranges
+        year_ranges = self.get_year_ranges()
 
         for start, end in year_ranges:
             candles = self.fetch_one_year_data(symbol, start, end)
