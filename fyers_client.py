@@ -27,6 +27,7 @@ class FyersClient:
         return ranges
     
     def fetch_one_year_data(self, symbol, start_date, end_date):
+
         data = {
         "symbol": f"NSE:{symbol}-EQ",
         "resolution": "1M",
@@ -44,4 +45,15 @@ class FyersClient:
         
         return response.get("candles", [])
     
+    def fetch_full_history(self, symbol):
+
+        all_candles = []
+        year_ranges = self.get_year_ranges
+
+        for start, end in year_ranges:
+            candles = self.fetch_one_year_data(symbol, start, end)
+            all_candles.extend(candles)
+            print(f"Fetched {len(candles)} months")
+        
+        return all_candles
 
