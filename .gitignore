@@ -10,3 +10,6 @@ tokens.json
 fyersApi.log
 fyersRequests.log
 *.log
+
+# Virtual enviroment
+venv/
