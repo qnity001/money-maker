@@ -19,7 +19,7 @@ class FyersClient:
         
         ranges.append(("2017-07-03", "2017-12-31"))
 
-        for year in range(2018, 2025):
+        for year in range(2018, 2026):
             ranges.append((f"{year}-01-01", f"{year}-12-31"))
 
         ranges.append(("2026-01-01", "2026-04-01"))
