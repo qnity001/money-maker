@@ -40,7 +40,7 @@ class FyersClient:
         response = self.fyers.history(data=data)
         
         if response.get("s") != "ok":
-            print(f"Error fetching {symbol} from {start_date} to {end_date}: {response.get('message')}")
+            print(f"Error fetching {symbol} from {start_date} to {end_date}: {response}")
             return []
         
         return response.get("candles", [])
