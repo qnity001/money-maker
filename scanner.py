@@ -1,3 +1,13 @@
+import csv
+
+def get_symbol_list():
+    symbols = []
+    with open("ind_nifty50list.csv") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            symbols.extend(row["Symbol"])
+    return symbols
+
 from fyers_client import FyersClient
 
 fy = FyersClient()
