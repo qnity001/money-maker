@@ -57,3 +57,18 @@ class FyersClient:
         
         return all_candles
 
+    def get_ath_value(self, symbol):
+
+        candles = self.fetch_full_history(symbol)
+
+        if not candles:
+            return None, None
+        
+        ath_candle = max(candles, key=lambda x: x[2])
+
+        epoch = ath_candle[0]
+        ath_value = ath_candle[2]
+        ath_date = datetime.fromtimestamp(epoch).strftime("%Y-%m")
+
+        return ath_value, ath_date
+
