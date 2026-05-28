@@ -13,3 +13,6 @@ fyersRequests.log
 
 # Virtual enviroment
 venv/
+
+# pycache
+__pycache__
