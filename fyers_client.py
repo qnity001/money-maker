@@ -25,3 +25,23 @@ class FyersClient:
         ranges.append(("2026-01-01", "2026-04-01"))
 
         return ranges
+    
+    def fetch_one_year_data(self, symbol, start_date, end_date):
+        data = {
+        "symbol": f"NSE:{symbol}-EQ",
+        "resolution": "1M",
+        "date_format": "1",
+        "range_from": start_date,
+        "range_to": end_date,
+        "cont_flag": 0
+    }
+        
+        response = self.fyers.history(data=data)
+        
+        if response.get("s") != "ok":
+            print(f"Error fetching {symbol} from {start_date} to {end_date}: {response.get('message')}")
+            return []
+        
+        return response.get("candles", [])
+    
+
