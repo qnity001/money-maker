@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import csv
 from fyers_client import FyersClient
 import json
@@ -5,7 +6,7 @@ import time
 
 def get_symbol_list():
     symbols = []
-    with open("ind_nifty50list.csv") as file:
+    with open("ind_nifty500list.csv") as file:
         reader = csv.DictReader(file)
         for row in reader:
             symbols.append(row["Symbol"])
@@ -13,25 +14,32 @@ def get_symbol_list():
 
 def create_ath_cache():
 
-    fy = FyersClient()
     symbols = get_symbol_list()
-
     ath_cache = {}
 
-    for symbol in symbols:
-        print(symbol)
-        try:
-            ath_value, ath_date = fy.get_ath_value(symbol)
-            ath_cache[symbol] = {
-                "ath_value": ath_value,
-                "ath_date": ath_date
-            }
-        except:
-            ath_cache[symbol] = {
-                "ath_value": None,
-                "ath_date": None
-            }
-        time.sleep(5)
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        
+        futures = []
+        for symbol in symbols:
+            print(symbol)
+            future = executor.submit(FyersClient.get_ath_value, symbol)
+            future.symbol = symbol
+            futures.append(future)
+            time.sleep(0.5)
+
+        for future in as_completed(futures):
+            symbol = future.symbol
+            try:
+                ath_value, ath_date = future.result()
+                ath_cache[symbol] = {
+                    "ath_value": ath_value,
+                    "ath_date": ath_date
+                }
+            except:
+                ath_cache[symbol] = {
+                    "ath_value": None,
+                    "ath_date": None
+                }
 
     with open("ath_cache.json", "w") as file:
         json.dump(ath_cache, file, indent=4)
