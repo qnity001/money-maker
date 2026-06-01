@@ -1,7 +1,8 @@
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from dotenv import load_dotenv
 from fyers_apiv3 import fyersModel
+import time
 
 # Load environment variables from .env file
 load_dotenv()
@@ -52,6 +53,7 @@ class FyersClient:
 
         for start, end in year_ranges:
             candles = self.fetch_one_year_data(symbol, start, end)
+            time.sleep(1)
             all_candles.extend(candles)
             print(f"Fetched {len(candles)} months")
         
