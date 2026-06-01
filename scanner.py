@@ -1,5 +1,7 @@
 import csv
 from fyers_client import FyersClient
+import json
+import time
 
 def get_symbol_list():
     symbols = []
@@ -9,11 +11,32 @@ def get_symbol_list():
             symbols.append(row["Symbol"])
     return symbols
 
-fy = FyersClient()
+def create_ath_cache():
 
-symbol = "WIPRO"
-ath_value, ath_date = fy.get_ath_value(symbol)
+    fy = FyersClient()
+    symbols = get_symbol_list()
 
-print(f"Symbol: {symbol}")
-print(f"ATH Value: {ath_value}")
-print(f"ATH Month: {ath_date}")
+    ath_cache = {}
+
+    for symbol in symbols:
+        print(symbol)
+        try:
+            ath_value, ath_date = fy.get_ath_value(symbol)
+            ath_cache[symbol] = {
+                "ath_value": ath_value,
+                "ath_date": ath_date
+            }
+        except:
+            ath_cache[symbol] = {
+                "ath_value": None,
+                "ath_date": None
+            }
+        time.sleep(5)
+
+    with open("ath_cache.json", "w") as file:
+        json.dump(ath_cache, file, indent=4)
+
+    print("ATH Values stored in JSON successfully")
+
+if __name__ == "__main__":
+    create_ath_cache()
