@@ -59,9 +59,11 @@ class FyersClient:
         
         return all_candles
 
-    def get_ath_value(self, symbol):
+    @staticmethod
+    def get_ath_value(symbol):
 
-        candles = self.fetch_full_history(symbol)
+        fy = FyersClient()
+        candles = fy.fetch_full_history(symbol)
 
         if not candles:
             return None, None
