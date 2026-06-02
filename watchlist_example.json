@@ -1,0 +1,12 @@
+{
+    "ACUTAAS": {
+        "breakout_month": "2026-05-01",
+        "breakout_high": 3184.9,
+        "entry_trigger": 3216.7490000000003
+    },
+    "ADANIPOWER": {
+        "breakout_month": "2026-05-01",
+        "breakout_high": 254.2,
+        "entry_trigger": 256.742
+    }
+}
