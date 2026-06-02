@@ -16,3 +16,6 @@ venv/
 
 # pycache
 __pycache__
+
+# ATH Cache
+ath_cache.json
