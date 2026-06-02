@@ -18,8 +18,8 @@ def get_ranged_data():
         "symbol":"NSE:WIPRO-EQ",
         "resolution":"M",
         "date_format":"1",
-        "range_from":"2024-01-01",
-        "range_to":"2024-12-31",
+        "range_from":"2026-05-01",
+        "range_to":"2026-05-31",
         "cont_flag":"0"
     }
 
@@ -28,3 +28,6 @@ def get_ranged_data():
 
 def get_ath_of_symbol(symbol):
     print(FyersClient.get_ath_value(symbol))
+
+if __name__ == "__main__":
+    get_ranged_data()
