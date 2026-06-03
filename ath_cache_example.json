@@ -1,14 +1,17 @@
 {
-    "ARE&M": {
-        "ath_value": 1775.95,
-        "ath_date": "2024-06"
+    "ABLBL": {
+        "ath_value": 175.0,
+        "ath_date": "2025-06",
+        "consecutive_breakouts": 0
     },
-    "AARTIIND": {
-        "ath_value": 1168.0,
-        "ath_date": "2021-10"
+    "ACUTAAS": {
+        "ath_value": 2710.0,
+        "ath_date": "2026-04",
+        "consecutive_breakouts": 0
     },
-    "AEGISVOPAK": {
-        "ath_value": 302.0,
-        "ath_date": "2025-07"
+    "ADANIPOWER": {
+        "ath_value": 226.24,
+        "ath_date": "2026-04",
+        "consecutive_breakouts": 0
     }
 }
