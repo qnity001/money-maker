@@ -1,12 +1,14 @@
 {
     "ACUTAAS": {
-        "breakout_month": "2026-05-01",
+        "breakout_month": "2026-05",
         "breakout_high": 3184.9,
-        "entry_trigger": 3216.7490000000003
+        "entry_trigger": 3216.7490000000003,
+        "breakout_class": "C Class Breakout (1 months)"
     },
-    "ADANIPOWER": {
-        "breakout_month": "2026-05-01",
-        "breakout_high": 254.2,
-        "entry_trigger": 256.742
+    "ADANIPORTS": {
+        "breakout_month": "2026-05",
+        "breakout_high": 1842.8,
+        "entry_trigger": 1861.228,
+        "breakout_class": "C Class Breakout (1 months)"
     }
 }
