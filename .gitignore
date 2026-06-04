@@ -18,3 +18,5 @@ __pycache__
 # ATH Cache
 ath_cache.json
 watchlist.json
+ath_cache_original.json
+active_positions.json
