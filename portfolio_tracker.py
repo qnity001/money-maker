@@ -10,13 +10,6 @@ def add_active_position(symbol, entry_price):
     # Update active_positions.json
     pass
 
-# This function calcualte the 30MA value based on 30 weeks candle
-def calculate_30MA(symbol):
-    # Call Fyers API (class) to get 30 week data candles
-    # Update Fyers Client to return the 30 week data
-    # Calculate the mean of 30 candles
-    pass
-
 # This function calculates the quantity based on risk value
 def calculate_quanity(entry, stoploss):
     load_dotenv()

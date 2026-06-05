@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from fyers_apiv3 import fyersModel
 import time
@@ -76,3 +76,18 @@ class FyersClient:
 
         return ath_value, ath_date
 
+    def fetch_thirty_week_history(self, symbol):
+        today = datetime.now()
+        start = today - timedelta(days=230)
+        today_str = today.strftime("%Y-%m-%d")
+        start_str = start.strftime("%Y-%m-%d")
+
+        candles = self.fetch_range_data(symbol, start_str, today_str, "1W")
+        return candles[-30:]
+    
+    def calculate_30MA(self, symbol):
+        candles = self.fetch_thirty_week_history(symbol)
+        closes = [candle[4] for candle in candles]
+        sum_value = sum(closes)
+        sma_30 = round((sum_value / 30), 2)
+        return sma_30
