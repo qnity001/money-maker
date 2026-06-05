@@ -52,12 +52,16 @@ def get_30_weeks_data(symbol):
         return []
         
     candles = response.get("candles", [])
-    last_30_candles = candles[-30:]
+    return candles[-30:]
 
-    for candle in last_30_candles:
-        print(candle)
+def calculate_30MA(symbol):
+        candles = get_30_weeks_data(symbol)
+        closes = [candle[4] for candle in candles]
+        sum_value = sum(closes)
+        sma_30 = round((sum_value / 30), 2)
+        print(sma_30)
 
 if __name__ == "__main__":
     symbol = "WELCORP"
     #get_monthly_ranged_data(symbol)
-    get_30_weeks_data(symbol)
+    calculate_30MA(symbol)
