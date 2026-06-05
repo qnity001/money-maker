@@ -34,6 +34,7 @@ def add_active_position(symbol, entry_price, fy):
 
     with open("active_positions.json", "w") as file:
         json.dump(active_positions, file, indent=4)
+    update_database(symbol)
     print("{symbol} bought successfully and added to active positions")
 
 # This function calculates the quantity based on risk value
@@ -45,12 +46,22 @@ def calculate_quantity(entry, stoploss):
     return risk_per_trade / risk_for_symbol
 
 # This function updates the watchlist for active positions
-def update_watchlist(symbol):
+def update_database(symbol):
+    
+    # Update watchlist
     with open("watchlist.json", "r") as file:
         watchlist = json.load(file)
     
     deleted = watchlist.pop(symbol, None)
 
     with open("watchlist.json", "w") as file:
-        json.dump(file)
+        json.dump(watchlist, file, indent=4)
 
+    # Update ath_cache
+    with open("ath_cache.json", "r") as file:
+        ath_cache = json.load(file)
+    
+    ath_cache[symbol]["active_position"] = True
+
+    with open("ath_cache.json", "w") as file:
+        json.dump(ath_cache, file, indent=4)
