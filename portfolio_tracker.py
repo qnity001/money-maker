@@ -1,3 +1,5 @@
+import json
+
 # This function stores active positions based on symbol and entry price
 def add_active_position(symbol, entry_price):
     # Input is symbol and entry price
@@ -23,7 +25,11 @@ def calculate_quanity(entry, stoploss):
 
 # This function updates the watchlist for active positions
 def update_watchlist(symbol):
-    # Load watchlist.json
-    # Remove the symbol key from watchlist json
-    pass
+    with open("watchlist.json", "r") as file:
+        watchlist = json.load(file)
+    
+    deleted = watchlist.pop(symbol, None)
+
+    with open("watchlist.json", "w") as file:
+        json.dump(file)
 
