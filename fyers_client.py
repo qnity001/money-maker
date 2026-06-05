@@ -27,11 +27,11 @@ class FyersClient:
 
         return ranges
     
-    def fetch_monthly_range_data(self, symbol, start_date, end_date):
+    def fetch_range_data(self, symbol, start_date, end_date, resolution):
 
         data = {
         "symbol": f"NSE:{symbol}-EQ",
-        "resolution": "1M",
+        "resolution": resolution,
         "date_format": "1",
         "range_from": start_date,
         "range_to": end_date,
@@ -52,7 +52,7 @@ class FyersClient:
         year_ranges = self.get_year_ranges()
 
         for start, end in year_ranges:
-            candles = self.fetch_range_data(symbol, start, end)
+            candles = self.fetch_range_data(symbol, start, end, "1M")
             time.sleep(1)
             all_candles.extend(candles)
             print(f"Fetched {len(candles)} months")

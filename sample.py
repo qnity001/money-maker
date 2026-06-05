@@ -13,9 +13,9 @@ access_token = os.getenv("ACCESS_TOKEN")
 # Initialize the FyersModel instance with your client_id, access_token, and enable async mode
 fyers = fyersModel.FyersModel(client_id=client_id, is_async=False, token=access_token, log_path="")
 
-def get_ranged_data():
+def get_monthly_ranged_data(symbol):
     data = {
-        "symbol":"NSE:WIPRO-EQ",
+        "symbol":f"NSE:{symbol}-EQ",
         "resolution":"M",
         "date_format":"1",
         "range_from":"2026-05-01",
@@ -30,4 +30,5 @@ def get_ath_of_symbol(symbol):
     print(FyersClient.get_ath_value(symbol))
 
 if __name__ == "__main__":
-    get_ranged_data()
+    symbol = "WIPRO"
+    get_monthly_ranged_data(symbol)
