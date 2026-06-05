@@ -40,7 +40,7 @@ def add_active_position(symbol, entry_price, fy):
 # This function calculates the quantity based on risk value
 def calculate_quantity(entry, stoploss):
     load_dotenv()
-    portfolio_value = os.getenv("PORTFOLIO_VALUE")
+    portfolio_value = float(os.getenv("PORTFOLIO_VALUE"))
     risk_per_trade = portfolio_value * 0.01
     risk_for_symbol = entry - stoploss
     return risk_per_trade / risk_for_symbol
@@ -65,3 +65,6 @@ def update_database(symbol):
 
     with open("ath_cache.json", "w") as file:
         json.dump(ath_cache, file, indent=4)
+
+if __name__ == "__main__":
+    add_active_position("WELCORP", 1398, fy)
