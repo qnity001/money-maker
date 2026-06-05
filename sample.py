@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 from fyers_apiv3 import fyersModel
 from fyers_client import FyersClient
+from datetime import timedelta, datetime
 
 load_dotenv()
 
@@ -29,6 +30,34 @@ def get_monthly_ranged_data(symbol):
 def get_ath_of_symbol(symbol):
     print(FyersClient.get_ath_value(symbol))
 
+def get_30_weeks_data(symbol):
+    today = datetime.now()
+    start = today - timedelta(days=230)
+    today_str = today.strftime("%Y-%m-%d")
+    start_str = start.strftime("%Y-%m-%d")
+
+    data = {
+        "symbol":f"NSE:{symbol}-EQ",
+        "resolution":"1W",
+        "date_format":"1",
+        "range_from":start_str,
+        "range_to": today_str,
+        "cont_flag":"0"
+    }
+
+    response = fyers.history(data=data)
+        
+    if response.get("s") != "ok":
+        print(f"Error fetching {symbol} from {start_str} to {today_str}: {response}")
+        return []
+        
+    candles = response.get("candles", [])
+    last_30_candles = candles[-30:]
+
+    for candle in last_30_candles:
+        print(candle)
+
 if __name__ == "__main__":
-    symbol = "WIPRO"
-    get_monthly_ranged_data(symbol)
+    symbol = "WELCORP"
+    #get_monthly_ranged_data(symbol)
+    get_30_weeks_data(symbol)
