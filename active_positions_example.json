@@ -1,8 +1,9 @@
 {
   "RELIANCE": {
-    "entry_price": 3242.61,
+    "entry_price": 3242,
     "stop_loss": 2980.00,
     "quantity": 38,
-    "entry_date": "2026-06-04"
+    "entry_date": "2026-06-04",
+    "investment_amount": 123196
   }
 }
