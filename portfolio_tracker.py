@@ -1,4 +1,6 @@
+from dotenv import load_dotenv
 import json
+import os
 
 # This function stores active positions based on symbol and entry price
 def add_active_position(symbol, entry_price):
@@ -17,11 +19,11 @@ def calculate_30MA(symbol):
 
 # This function calculates the quantity based on risk value
 def calculate_quanity(entry, stoploss):
-    # Get portfolio value from .env
-    # Calculate risk_per_trade = portfolio_value * 0.01
-    # Calculate risk_for_symbol = entry - stoploss
-    # Return qty = risk_per_trade / risk_for_symbol
-    pass
+    load_dotenv()
+    portfolio_value = os.getenv("PORTFOLIO_VALUE")
+    risk_per_trade = portfolio_value * 0.01
+    risk_for_symbol = entry - stoploss
+    return risk_per_trade / risk_for_symbol
 
 # This function updates the watchlist for active positions
 def update_watchlist(symbol):
