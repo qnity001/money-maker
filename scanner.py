@@ -35,14 +35,16 @@ def create_ath_cache():
                     "ath_value": ath_value,
                     "ath_date": ath_date,
                     "consecutive_breakouts": 0,
-                    "strong_breakout": False
+                    "strong_breakout": False,
+                    "active_position": False
                 }
             except:
                 ath_cache[symbol] = {
                     "ath_value": None,
                     "ath_date": None,
                     "consecutive_breakouts": None,
-                    "strong_breakout": None
+                    "strong_breakout": None,
+                    "active_position": None
                 }
 
     with open("ath_cache.json", "w") as file:

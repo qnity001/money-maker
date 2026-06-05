@@ -3,18 +3,21 @@
         "ath_value": 175.0,
         "ath_date": "2025-06",
         "consecutive_breakouts": 0,
-        "strong_breakout": false
+        "strong_breakout": false,
+        "active_position": false
     },
     "ACUTAAS": {
         "ath_value": 2710.0,
         "ath_date": "2026-04",
         "consecutive_breakouts": 0,
-        "strong_breakout": false
+        "strong_breakout": false,
+        "active_position": false
     },
     "ADANIPOWER": {
         "ath_value": 226.24,
         "ath_date": "2026-04",
         "consecutive_breakouts": 0,
-        "strong_breakout": false
+        "strong_breakout": false,
+        "active_position": false
     }
 }
