@@ -35,8 +35,8 @@ def add_active_position(symbol, entry_price, fy):
 
     with open("active_positions.json", "w") as file:
         json.dump(active_positions, file, indent=4)
-    update_database(symbol)
-    print("{symbol} bought successfully and added to active positions")
+    #update_database(symbol)
+    print(f"{symbol} bought successfully and added to active positions")
 
 # This function calculates the quantity based on risk value
 def calculate_quantity(entry, stoploss):
@@ -68,4 +68,5 @@ def update_database(symbol):
         json.dump(ath_cache, file, indent=4)
 
 if __name__ == "__main__":
-    add_active_position("WELCORP", 1398, fy)
+    #add_active_position("RRKABEL", 2118, fy)
+    pass
