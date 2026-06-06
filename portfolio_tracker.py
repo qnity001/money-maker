@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from fyers_client import FyersClient
 import json
+import math
 import os
 
 fy = FyersClient()
@@ -43,7 +44,7 @@ def calculate_quantity(entry, stoploss):
     portfolio_value = float(os.getenv("PORTFOLIO_VALUE"))
     risk_per_trade = portfolio_value * 0.01
     risk_for_symbol = entry - stoploss
-    return risk_per_trade / risk_for_symbol
+    return math.floor(risk_per_trade / risk_for_symbol)
 
 # This function updates the watchlist for active positions
 def update_database(symbol):
