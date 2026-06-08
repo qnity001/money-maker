@@ -91,3 +91,12 @@ class FyersClient:
         sum_value = sum(closes)
         sma_30 = round((sum_value / 30), 2)
         return sma_30
+    
+    def fetch_last_week_candle(self, symbol):
+        today = datetime.now()
+        start = today - timedelta(days=10)
+        today_str = today.strftime("%Y-%m-%d")
+        start_str = start.strftime("%Y-%m-%d")
+
+        candles = self.fetch_range_data(symbol, start_str, today_str, "1W")
+        return candles[-1:]
