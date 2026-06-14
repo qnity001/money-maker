@@ -8,7 +8,7 @@ import os
 fy = FyersClient()
 
 # This function stores active positions based on symbol and entry price
-def add_active_position(symbol, entry_price, fy):
+def add_active_position(symbol, entry_price, fy=fy):
     thirty_ma_value = fy.calculate_30MA(symbol)
     quantity = calculate_quantity(entry_price, thirty_ma_value)
     investment_amount = entry_price * quantity
@@ -76,5 +76,5 @@ def update_database(symbol):
     return breakout_class
 
 if __name__ == "__main__":
-    #add_active_position("VIJAYA", 1381, fy)
+    add_active_position("RRKABEL", 2118)
     pass
