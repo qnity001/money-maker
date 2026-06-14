@@ -25,17 +25,21 @@ def add_active_position(symbol, entry_price, fy):
     except FileNotFoundError:
         active_positions = {}
 
+    # Updates the og ath cache, watchlist, and gets the breakout_Class
+    breakout_class = update_database(symbol)
+
     active_positions[symbol] = {
         "entry_price": entry_price,
         "stop_loss": thirty_ma_value,
         "quantity": quantity,
         "entry_date": datetime.today().strftime("%Y-%m-%d"),
-        "investment_amount": investment_amount
+        "investment_amount": investment_amount,
+        "breakout_class": breakout_class
     }
 
     with open("active_positions.json", "w") as file:
         json.dump(active_positions, file, indent=4)
-    #update_database(symbol)
+
     print(f"{symbol} bought successfully and added to active positions")
 
 # This function calculates the quantity based on risk value
@@ -52,6 +56,8 @@ def update_database(symbol):
     # Update watchlist
     with open("watchlist.json", "r") as file:
         watchlist = json.load(file)
+
+    breakout_class = watchlist[symbol]["breakout_class"]
     
     deleted = watchlist.pop(symbol, None)
 
@@ -67,6 +73,8 @@ def update_database(symbol):
     with open("ath_cache.json", "w") as file:
         json.dump(ath_cache, file, indent=4)
 
+    return breakout_class
+
 if __name__ == "__main__":
-    #add_active_position("RRKABEL", 2118, fy)
+    #add_active_position("VIJAYA", 1381, fy)
     pass
