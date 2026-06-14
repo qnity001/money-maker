@@ -30,7 +30,7 @@ def add_active_position(symbol, entry_price, fy):
 
     active_positions[symbol] = {
         "entry_price": entry_price,
-        "stop_loss": thirty_ma_value,
+        "stoploss": thirty_ma_value,
         "quantity": quantity,
         "entry_date": datetime.today().strftime("%Y-%m-%d"),
         "investment_amount": investment_amount,
