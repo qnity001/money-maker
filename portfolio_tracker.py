@@ -76,5 +76,5 @@ def update_database(symbol):
     return breakout_class
 
 if __name__ == "__main__":
-    add_active_position("RRKABEL", 2118)
+    add_active_position("WELCORP", 1397)
     pass

@@ -3,7 +3,7 @@ from fyers_client import FyersClient
 import json
 import math
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def get_symbol_list():
     symbols = []
@@ -38,9 +38,21 @@ def detect_breakout():
     with open("ath_cache.json", "r") as file:
         ath_cache = json.load(file)
 
+    # Remove expired watchlist entries
+    today = datetime.now().strftime("%Y-%m")
+
+    for symbol in list(watchlist.keys()):
+        expiry_str = watchlist[symbol].get("expiry_date", "")
+        if expiry_str:
+            expiry_dt = datetime.strptime(expiry_str, "%Y-%m")
+            today_dt = datetime.strptime(today, "%Y-%m")
+            if expiry_dt < today_dt:
+                del watchlist[symbol]
+                print(f"Expired: {symbol}")
+
     for symbol in symbols:
 
-        candles = fy.fetch_range_data(symbol, "2026-05-01", "2026-05-31")
+        candles = fy.fetch_range_data(symbol, "2026-06-01", "2026-06-30", "1M")
         candle = candles[0]
         print(candle)
 
@@ -53,7 +65,9 @@ def detect_breakout():
                 ath_cache[symbol]["strong_breakout"] = True
 
             epoch = candle[0]
-            new_ath_date = datetime.fromtimestamp(epoch).strftime("%Y-%m")
+            new_ath_datetime = datetime.fromtimestamp(epoch)
+            new_ath_date = new_ath_datetime.strftime("%Y-%m")
+            expiry_date = (new_ath_datetime + timedelta(days=93)).strftime("%Y-%m")
             breakout_class = get_month_difference(new_ath_date, ath_cache[symbol]["ath_date"])
             print(breakout_class)
 
@@ -61,7 +75,8 @@ def detect_breakout():
                 "breakout_month": new_ath_date,
                 "breakout_high": candle[2],
                 "entry_trigger": math.ceil(candle[2] * 1.001),
-                "breakout_class": breakout_class
+                "breakout_class": breakout_class,
+                "expiry_date": expiry_date
             }
             ath_cache[symbol]["ath_value"] = candle[2]
             ath_cache[symbol]["ath_date"] = new_ath_date

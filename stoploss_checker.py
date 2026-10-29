@@ -31,7 +31,7 @@ for symbol, fields in active_positions.items():
             "exit_price": sma_30, # Exit price
             "quantity": active_positions[symbol]["quantity"],
             "original_breakout_class": active_positions[symbol]["breakout_class"],
-            "pnl": None # Profit and loss
+            "pnl": active_positions[symbol]["quantity"] * (sma_30 - active_positions[symbol]["entry_price"])
         })
         
         # Remove from active positions
